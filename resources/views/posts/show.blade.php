@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Blog</title>
-    <link rel="stylesheet" href="css/multiColumn.css">
+    <link rel="stylesheet" href="{{ secure_asset('css/multiColumn.css') }}">
 </head>
 
 <body>
@@ -15,20 +15,21 @@
     </div>
     <main>
         <!--<div class="content">-->
-        <div class='content'>
-            <h1>Blog Name</h1>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <h2 class='title'>
-                        <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                    </h2>
-                    <p class='body'>{{ $post->body }}</p>
-                </div>
-            @endforeach
-            <div class='paginate'>
-                {{ $posts->links() }}
+        <div class="content">
+            <h1 class="title">
+                {{ $post->title }}
+            </h1>
+            <div class="content__post">
+                <h3>本文</h3>
+                <p>{{ $post->body }}</p>    
+            </div>
+            
+            <div class="back">
+            <a href="/">戻る</a>
             </div>
         </div>
+        
+
         
         <div class="localNavigation">
             <p>ローカルナビゲーション</p>
