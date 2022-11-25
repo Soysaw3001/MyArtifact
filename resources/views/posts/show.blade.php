@@ -23,10 +23,12 @@
                 <h3>本文</h3>
                 <p>{{ $post->body }}</p>    
             </div>
+            <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
             
             <div class="back">
             <a href="/">戻る</a>
             </div>
+            
         </div>
         
 
