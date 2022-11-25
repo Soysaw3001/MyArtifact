@@ -6,6 +6,7 @@ body{
     height: 70px;
     text-align: center;
     background-color: #eee;
+    font-size:30px;
 }
 .glovalNavigation{
     height: 70px;
@@ -21,7 +22,6 @@ main{
 .content{
     flex: 1;
     background-color: #eee;
-    text-align: center;
     margin-right: 10px;
 }
 .localNavigation{
