@@ -24,6 +24,18 @@
                 <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
             </div>
+            <div class="category">
+            <h2>Category</h2>
+                @foreach($categories as $category)
+
+                    <label>
+                    {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
+                    <input type="checkbox" value="{{ $category->id }}" name="categories_array[]">
+                        {{$category->name}}
+                    </input>
+                    </label>
+                @endforeach   
+            </div>
             <div class="body">
                 <h2>Body</h2>
                 <textarea name="post[body]" placeholder="今日も1日お疲れさまでした。">{{ old('post.body') }}</textarea>

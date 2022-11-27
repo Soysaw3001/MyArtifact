@@ -19,6 +19,12 @@
             <h1 class="title">
                 {{ $post->title }}
             </h1>
+            
+            <h2 class="categories">
+                @foreach($post->categories as $category)   
+                    {{ $category->category_name }}
+                @endforeach
+            </h2>
             <div class="content__post">
                 <h3>本文</h3>
                 <p>{{ $post->body }}</p>    
