@@ -17,12 +17,20 @@ class Post extends Model
     protected $fillable = [
     'title',
     'body',
+    'user_id',
+    'image_path'
     ];
     
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
+    
+    public function user()
+    {
+    return $this->belongsTo(User::class);
+    }
+    
     public function getByLimit(int $limit_count = 10)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
@@ -32,7 +40,7 @@ class Post extends Model
     public function getPaginateByLimit(int $limit_count = 10)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
-    return $this::with('categories')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    return $this::with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 
 }
