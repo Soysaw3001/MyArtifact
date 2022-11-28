@@ -1,49 +1,37 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <title>Blog</title>
-    <link rel="stylesheet" href="{{ secure_asset('css/multiColumn.css') }}">
-</head>
+@extends('layouts.common')
+ 
+@section('title', '記事詳細ページ')
+@section('keywords', 'キーワード1,キーワード2,キーワード3')
+@section('description', '記事詳細ページの説明文です')
+@section('pageCss')
+<link href="{{secure_asset('css/multiColumn.css')}}" rel="stylesheet">
+@endsection
 
-<body>
-    <header class="header">
-       <p>ヘッダー</p>
-    </header>
-    <div class="glovalNavigation">
-       <p>グローバルナビゲーション</p>
+@include('layouts.header')
+@include('layouts.GlobalNavigation')
+
+@section('content')
+    <div class="content">
+        <h1 class="title">
+            {{ $post->title }}
+        </h1>
+        
+        <h2 class="categories">
+            @foreach($post->categories as $category)   
+                {{ $category->category_name }}
+            @endforeach
+        </h2>
+        <div class="content__post">
+            <h3>本文</h3>
+            <p>{{ $post->body }}</p>    
+        </div>
+        <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
+        
+        <div class="back">
+        <a href="/">戻る</a>
+        </div>
+        
     </div>
-    <main>
-        <!--<div class="content">-->
-        <div class="content">
-            <h1 class="title">
-                {{ $post->title }}
-            </h1>
-            
-            <h2 class="categories">
-                @foreach($post->categories as $category)   
-                    {{ $category->category_name }}
-                @endforeach
-            </h2>
-            <div class="content__post">
-                <h3>本文</h3>
-                <p>{{ $post->body }}</p>    
-            </div>
-            <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
-            
-            <div class="back">
-            <a href="/">戻る</a>
-            </div>
-            
-        </div>
-        
-
-        
-        <div class="localNavigation">
-            <p>ローカルナビゲーション</p>
-        </div>
-    </main>
-    <footer class="footer">
-        <p>フッター</p>
-    </footer>
-</body>
+@endsection
+@include('layouts.LocalNavigation')
+@include('layouts.footer')

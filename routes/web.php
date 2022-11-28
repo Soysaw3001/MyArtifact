@@ -13,15 +13,16 @@ use App\Http\Controllers\PostController;      //追加
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
-Route::delete('/posts/{post}', [PostController::class,'delete']);
-Route::put('/posts/{post}', [PostController::class, 'update']);
-Route::post('/posts', [PostController::class, 'store']);
-Route::get('/posts/create', [PostController::class, 'create']);
-Route::get('/posts/{post}', [PostController::class ,'show']);
+Route::controller(PostController::class)->middleware(['auth'])->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::post('/posts', 'store')->name('store');
+    Route::get('/posts/create', 'create')->name('create');
+    Route::get('/posts/{post}', 'show')->name('show');
+    Route::put('/posts/{post}', 'update')->name('update');
+    Route::delete('/posts/{post}', 'delete')->name('delete');
+    Route::get('/posts/{post}/edit', 'edit')->name('edit');
+});
 // '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
-
-Route::get('/', [PostController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
