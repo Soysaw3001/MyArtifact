@@ -31,7 +31,6 @@
                     @method('DELETE')
                     <button type="button" onclick="deletePost({{ $post->id }})">delete</button> 
                 </form>
-                <img src="{{ Storage::url($post->img_path) }}" width="25%">
             </div>
         @endforeach
         <div class='paginate'>

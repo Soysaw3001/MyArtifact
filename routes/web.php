@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;      //追加
+use App\Http\Controllers\CommentsController;      //追加
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,13 +16,17 @@ use App\Http\Controllers\PostController;      //追加
 */
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
+    Route::post('/posts/{post}', 'createcomment')->name('createcomment');
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/create', 'create')->name('create');
     Route::get('/posts/{post}', 'show')->name('show');
     Route::put('/posts/{post}', 'update')->name('update');
     Route::delete('/posts/{post}', 'delete')->name('delete');
-    Route::get('/posts/{post}/edit', 'edit')->name('edit');
-});
+    Route::get('/posts/{post}/edit', 'edit')->name('edit');});
+    
+Route::controller(CommentsController::class)->middleware(['auth'])->group(function(){
+    Route::post('/posts/{post}', 'Store')->name('Store');});
+
 // '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
 
 Route::get('/dashboard', function () {
