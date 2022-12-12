@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\PostRequest; // useする
 use App\Models\Category;
+use Cloudinary;
 
 /**
  * Post一覧を表示する
@@ -39,10 +40,16 @@ class PostController extends Controller
     
     public function store(Post $post, PostRequest $request, Category $category) // 引数をRequestからPostRequestにする
     {
-        $input_post = $request['post'];
-        $input_post += ['user_id' => $request->user()->id];
-        $input_categories = $request->categories_array;
-
+        $input_post = $request['post']; //$input_postに$requestの'post'を代入
+        $input_post += ['user_id' => $request->user()->id]; //$input_postにuser_idとして、request中のuserのidを代入
+        $input_categories = $request->categories_array; //input_categoriesに$request中のcategories_arrayを追加
+        
+        if($image = $request->file('image')) {
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); //image_uralにCloudinaryのuploadを実行($requestのfile('image')の絶対パスを確保→)安全なパスに変更したものを格納
+            $input_post += ["image_path" => $image_url];
+            //dd($image_url);  //画像のURLを画面に表示
+        };
+        
         $post->fill($input_post)->save();
 
         $post->categories()->attach($input_categories); 
@@ -69,5 +76,10 @@ class PostController extends Controller
         return redirect('/');
     }
 
+    //public function createcomment(Post $post)
+    //{
+    //   return view('posts/createcomment');
+    //}
+    
 }
 ?>
