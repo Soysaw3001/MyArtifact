@@ -10,16 +10,24 @@
 </head>
 
 <body>
-    @yield('header')
-    @yield('GlobalNavigation')
-    <main>
-        <!--<div class="content">-->
-        <div class='content'>
-            @yield('content')
-        </div>
+    <header id="header">
+        @yield('header')
+        @yield('GlobalNavigation')
+    </header>
+    
+    <div id="container" class="wrapper">
+        <main>
+            <!--<div class="content">-->
+            <div class='content'>
+                @yield('content')
+            </div>
         
-        @yield('LocalNavigation')
-    </main>
+        </main>
+        
+        <aside id="sidebar">
+            @yield('LocalNavigation')
+        </aside>
+    </div>
     @yield('footer')
     <script>
     function deletePost(id) {

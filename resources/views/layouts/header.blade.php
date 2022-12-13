@@ -1,5 +1,5 @@
 @section('header')
     <header class="header">
-       <p>OW2 Friend Finder(ヘッダー)</p>
+       <img src="image/TitleLogo.png" alt="サンプル" >
     </header>
 @endsection

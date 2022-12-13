@@ -20,11 +20,25 @@
                 <h2>タイトル</h2>
                 <input type='text' name='post[title]' value="{{ $post->title }}">
             </div>
+            <div class="category">
+                <h2>Category</h2>
+                @foreach($categories as $category)
+                <label>
+                {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
+                    <input type="checkbox" value="{{ $category->id }}" name="categories_array[]">
+                    {{$category->name}}
+                    </input>
+                </label>
+                @endforeach   
+            </div>
+            
             <div class='content__body'>
                 <h2>本文</h2>
                 <input type='text' name='post[body]' value="{{ $post->body }}">
             </div>
-        <input type="submit" value="保存">
+            
+            <input type="file" name="image">
+            <input type="submit" value="store"/>
         </form>
     </div>
 @endsection

@@ -18,13 +18,15 @@
         
         <h2 class="categories">
             @foreach($post->categories as $category)   
-                {{ $category->category_name }}
+                <h3>{{ $category->name }}</h3></h3>
             @endforeach
         </h2>
+        
         <div class="content__post">
             <h3>本文</h3>
             <p>{{ $post->body }}</p>    
         </div>
+        <img src= {{$post->image_path}}>
         
         <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
         
@@ -47,7 +49,7 @@
  
             <div class="form-group">
                 <label for="body">
-                 本文
+                 コメントフォーム<br>
                 </label>
      
                 <textarea
@@ -62,7 +64,8 @@
                 </div>
                 @endif
             </div>
- 
+            
+            
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary">
                 コメントする
@@ -84,7 +87,6 @@
             @forelse($post->comments as $comment)
                 <div class="border-top p-4">
                     <time class="text-secondary">
-                        {{ $comment->id }} /
                         {{ $comment->created_at->format('Y.m.d H:i') }} / 
                         from {{ $comment->user->name }}さん 
                     </time>
