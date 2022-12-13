@@ -12,10 +12,10 @@
 
 @section('content')
     <div class='content'>
-        <h1>Blog Name</h1>
+        
         @foreach ($posts as $post)
             <div class='post'>
-                <h2 class='title'>
+                <h2 class='post-title'>
                     <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                 </h2>
             
@@ -25,7 +25,10 @@
                     @endforeach
                 </h5>
                 <small>{{ $post->user->name }}</small>
+
                 <p class='body'>{{ $post->body }}</p>
+                
+                <img src= {{$post->image_path}}>
                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                     @csrf
                     @method('DELETE')
