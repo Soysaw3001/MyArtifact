@@ -1,5 +1,5 @@
 @section('header')
     <header class="header">
-       <img src="image/TitleLogo.png" alt="サンプル" >
+       <img src="{{ asset('image/TitleLogo.png') }}" alt="">
     </header>
 @endsection
